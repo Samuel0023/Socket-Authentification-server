@@ -9,6 +9,7 @@ class Server {
         this.usersPath = '/api/users';
         //middlewares
         this.middlewares();
+        this.app.use(express.json());
         //app routes
         this.routes();
     }

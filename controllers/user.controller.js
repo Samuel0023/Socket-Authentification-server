@@ -5,14 +5,20 @@ const usersGet = (req, res) => {
 };
 
 const usersPost = (req, res) => {
+    //const body = req.body;
+    const { nombre, edad } = req.body
     res.json({
-        msg: 'POST API - Controller'
+        msg: 'POST API - Controller',
+        nombre,
+        edad
     });
 };
 
 const usersPut = (req, res) => {
+    const { id } = req.params;
     res.json({
-        msg: 'PUT API - Controller'
+        msg: 'PUT API - Controller',
+        id
     });
 };
 
