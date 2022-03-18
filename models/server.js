@@ -4,10 +4,40 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.port;
+        //middlewares
+        this.middlewares();
+        //app routes
+        this.routes();
     }
+
+    middlewares() {
+        //dir public
+        this.app.use(express.static('public'))
+    }
+
     routes() {
         this.app.get('/', (req, res) => {
             res.send('hello world');
+        });
+        this.app.get('/api', (req, res) => {
+            res.status(200).json({
+                msg: 'get API'
+            })
+        });
+        this.app.put('/api', (req, res) => {
+            res.status(200).json({
+                msg: 'put API'
+            })
+        });
+        this.app.post('/api', (req, res) => {
+            res.status(200).json({
+                msg: 'post API'
+            })
+        });
+        this.app.delete('/api', (req, res) => {
+            res.status(200).json({
+                msg: 'delete API'
+            })
         });
     }
 
