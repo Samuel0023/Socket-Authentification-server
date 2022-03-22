@@ -11,11 +11,6 @@ const usersGet = (req, res) => {
 
 const usersPost = async(req, res) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json(errors);
-    }
-
     const { name, mail, password, rol } = req.body;
     const usuario = new User({ name, mail, password, rol });
 
