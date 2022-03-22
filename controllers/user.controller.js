@@ -31,15 +31,15 @@ const usersPost = async(req, res) => {
 
 const usersPut = async(req, res) => {
     const { id } = req.params;
-    const { password, google, ...rest } = req.body;
+    const { _id, password, google, ...rest } = req.body;
     if (password) {
         const salt = bcrytjs.genSaltSync();
         rest.password = bcrytjs.hashSync(password, salt);
     }
-    const usuario = await User.findByIdAndUpdate(id, rest);
+    const user = await User.findByIdAndUpdate(id, rest);
     res.json({
         msg: 'PUT API - Controller',
-        usuario
+        user
     });
 };
 

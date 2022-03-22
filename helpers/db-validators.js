@@ -14,4 +14,14 @@ const isValiteMail = (async(mail = '') => {
         throw new Error(`This mail ${mail} already exists`);
     }
 });
-module.exports = { isValiteRole, isValiteMail };
+
+
+
+const idExists = async(id) => {
+    const userExist = await User.findById(id);
+    if (!userExist) {
+        throw new Error(`This user with id: ${id} no exists`);
+    }
+};
+
+module.exports = { isValiteRole, isValiteMail, idExists };
