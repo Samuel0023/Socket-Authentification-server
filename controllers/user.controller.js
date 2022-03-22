@@ -11,16 +11,9 @@ const usersGet = (req, res) => {
 
 const usersPost = async(req, res) => {
 
-    const { name, mail, password, rol } = req.body;
-    const usuario = new User({ name, mail, password, rol });
+    const { name, mail, password, role } = req.body;
+    const usuario = new User({ name, mail, password, role });
 
-    // Verificar si el correo existe
-    var existeMail = await User.findOne({ mail });
-    if (existeMail) {
-        return res.status(400).json({
-            msg: 'Ese correo esta registrado'
-        });
-    }
 
     //Encriptar la contraseña
     var salt = bcrytjs.genSaltSync();
@@ -36,11 +29,17 @@ const usersPost = async(req, res) => {
     });
 };
 
-const usersPut = (req, res) => {
+const usersPut = async(req, res) => {
     const { id } = req.params;
+    const { password, google, ...rest } = req.body;
+    if (password) {
+        const salt = bcrytjs.genSaltSync();
+        rest.password = bcrytjs.hashSync(password, salt);
+    }
+    const usuario = await User.findByIdAndUpdate(id, rest);
     res.json({
         msg: 'PUT API - Controller',
-        id
+        usuario
     });
 };
 
