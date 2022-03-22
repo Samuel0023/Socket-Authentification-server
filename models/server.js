@@ -1,10 +1,11 @@
 const express = require('express');
+require('dotenv');
 const cors = require('cors');
 const { dbConnection } = require('../database/config.db');
 class Server {
     constructor() {
         this.app = express();
-        this.port = process.env.port;
+        this.port = process.env.PORT;
         this.usersPath = '/api/users';
         //connection DB
         this.connectDB();
