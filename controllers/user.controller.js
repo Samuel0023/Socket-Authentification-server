@@ -1,11 +1,21 @@
 const bcrytjs = require('bcryptjs');
-const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
 
-const usersGet = (req, res) => {
+const usersGet = async(req, res) => {
+    const { limit = 5, skip = 0 } = req.query;
+    let query = { state: true };
+
+
+    const [total, users] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query)
+        .skip(parseInt(skip))
+        .limit(parseInt(limit))
+    ]);
     res.json({
-        msg: 'GET API - Controller'
+        total,
+        users
     });
 };
 
@@ -49,9 +59,15 @@ const usersPatch = (req, res) => {
     });
 };
 
-const usersDelete = (req, res) => {
+const usersDelete = async(req, res) => {
+    const { id } = req.params;
+    //borrar fisicamente
+    //const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndUpdate(id, { state: false });
+
     res.json({
-        msg: 'DELETE API - Controller'
+        msg: 'DELETE API - Controller',
+        usuario
     });
 };
 
