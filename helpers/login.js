@@ -1,4 +1,5 @@
 const bcryptjs = require('bcryptjs');
+const { generateJWT } = require('./auth.token.js');
 class Login {
     user;
 
@@ -11,7 +12,7 @@ class Login {
         this.user = user;
     }
 
-    validateUser(res) {
+    async validateUser(res) {
         //console.log({ "mail": `${this.mail}` });
         if (!this.user) {
             return res.status(400).json({
@@ -29,8 +30,12 @@ class Login {
             });
 
         }
+        const token = await generateJWT(this.user.id);
+        let user = this.user
         return res.json({
-            msg: 'Login OK :)'
+            msg: 'Login OK :)',
+            user,
+            token
         });
     }
     validateState() {
