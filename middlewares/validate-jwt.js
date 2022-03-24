@@ -21,7 +21,8 @@ const validateJWT = async(req, res, next) => {
             });
         }
         //verificar si el usuario esta activo
-        if (!user.status) {
+
+        if (!user.state) {
             return res.status(401).json({
                 msg: 'no active user - state: false'
             });
@@ -36,5 +37,4 @@ const validateJWT = async(req, res, next) => {
         });
     }
 };
-
 module.exports = { validateJWT };
