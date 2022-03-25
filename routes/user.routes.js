@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { usersGet, usersDelete, usersPost, usersPut, usersPatch } = require('../controllers/user.controller');
+const UserController = require('../controllers/user.controller');
 const { isValiteRole, isValiteMail, idExists } = require('../helpers/db.validators');
 
 const { validateFields } = require('../middlewares/validate-fields');
@@ -10,7 +10,7 @@ const { isAdminRole, hasARole } = require('../middlewares/validate-role');
 
 const router = new Router();
 
-router.get('/', usersGet);
+router.get('/', UserController.usersGet);
 
 router.post('/', [
     check('name', 'invalid name').not().isEmpty(),
@@ -20,16 +20,16 @@ router.post('/', [
     //check('role').custom(role =>isValiteRole(role)),
     check('role').custom(isValiteRole),
     validateFields
-], usersPost);
+], UserController.usersPost);
 
 router.put('/:id', [
     check('id', 'invalid id').isMongoId(),
     check('id').custom(idExists),
     check('role').custom(isValiteRole),
     validateFields
-], usersPut);
+], UserController.usersPut);
 
-router.patch('/', usersPatch);
+router.patch('/', UserController.usersPatch);
 
 router.delete('/:id', [
     validateJWT,
@@ -38,6 +38,6 @@ router.delete('/:id', [
     check('id', 'invalid id').isMongoId(),
     check('id').custom(idExists),
     validateFields
-], usersDelete);
+], UserController.usersDelete);
 
 module.exports = router;
