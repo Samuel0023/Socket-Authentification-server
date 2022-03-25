@@ -3,6 +3,7 @@ const bcrytjs = require('bcryptjs');
 
 const User = require('../models/user');
 
+
 const UserController = {
 
     usersGet: async(req, res) => {
