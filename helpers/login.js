@@ -27,11 +27,12 @@ class Login {
         if (!this.validatePassword()) {
             return res.status(400).json({
                 msg: 'incorrect password'
+
             });
 
         }
         const token = await generateJWT(this.user.id);
-        let user = this.user
+        let user = this.user;
         return res.json({
             msg: 'Login OK :)',
             user,
