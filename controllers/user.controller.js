@@ -1,7 +1,7 @@
 'use strict'
 const bcrytjs = require('bcryptjs');
 
-const User = require('../models/user');
+const { User } = require('../models');
 
 
 const UserController = {

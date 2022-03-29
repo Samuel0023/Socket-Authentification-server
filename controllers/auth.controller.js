@@ -1,7 +1,7 @@
 const { googleVerify } = require("../helpers/google,verify");
 const Login = require("../helpers/login");
 
-const User = require('../models/user');
+const { User } = require('../models');
 
 const login = async(req, res) => {
 
