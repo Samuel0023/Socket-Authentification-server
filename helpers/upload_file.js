@@ -8,7 +8,7 @@ const uploadDocument = async(files, suportedExtensions = ['png', 'jpg', 'jpeg', 
         const { file } = files;
         const nameSplited = file.name.split('.');
         const extension = nameSplited[nameSplited.length - 1];
-        console.log(extension);
+
 
         //valid extensions
 
@@ -19,7 +19,7 @@ const uploadDocument = async(files, suportedExtensions = ['png', 'jpg', 'jpeg', 
         const nameTemp = uuidv4() + '.' + extension;
 
         const uploadPath = path.join(__dirname, '../uploads', folder, nameTemp);
-        console.log(uploadPath);
+
         file.mv(uploadPath, (err) => {
             if (err) { reject(err) }
             resolve(nameTemp);
