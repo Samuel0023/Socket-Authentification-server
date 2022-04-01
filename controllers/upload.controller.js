@@ -1,4 +1,4 @@
-const { response } = require("express");
+const { response, text } = require("express");
 const { uploadDocument } = require("../helpers/upload_file");
 
 
@@ -12,13 +12,12 @@ const UploadController = {
             return;
         }
 
-        //imagenes
         try {
-            const name = await uploadDocument(req.files);
+            const name = await uploadDocument(req.files, ['txt', 'md'], 'text');
             console.log(name);
             res.json({ name });
         } catch (error) {
-            res.json({ error })
+            res.status(400).json({ error })
         }
     }
 

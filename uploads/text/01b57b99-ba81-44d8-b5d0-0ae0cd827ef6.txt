@@ -1,0 +1,8 @@
+Hola, ¿Cómo están?!! 
+Soy un estudiante de la carrera de Ing. en Sistemas De Información (UTN), actualmente estoy cursando mi 4.º año de 5. Poseo conocimientos sólidos en Java, tanto funcionales como técnicos. Así como el desarrollo en Backend en general usando otras tecnologías como JavaScript con Node.js  para el desarrollo de WebServer-Rest y el consumo de Apis, pero dichos conocimientos se pueden trasladar a uso de otras tecnologías, ya que solo son una herramienta de producción. Actualmente,  estoy buscando oportunidades para introducirme en el mundo laboral y ejercer mi profesión. En este momento me encuentro realizando cursos de inglés y también algunos cursos de capacitación más que nada centrándome en el desarrollo Backend, en paralelo a la carrera. En fin, me gustaría mucho poder ser seleccionado y dar todo de mí.
+
+Portfolio: https://portfolio-samuel-ontiveros.vercel.app
+GitHub:  https://github.com/Samuel0023
+
+Saludos,
+Samuel Ontiveros
