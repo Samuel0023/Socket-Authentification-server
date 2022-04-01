@@ -13,6 +13,12 @@ router.put('/:collection/:id', [
     check('id', 'invalid id').isMongoId(),
     check('collection').custom(c => allowedCollections(c, ['users', 'product'])),
     validateFields
-], UploadController.updateImg);
+], UploadController.updateImgCloudinary);
 
+router.get('/:collection/:id', [
+
+    check('id', 'invalid id').isMongoId(),
+    check('collection').custom(c => allowedCollections(c, ['users', 'product'])),
+    validateFields
+], UploadController.getFileCloudinary);
 module.exports = router;
