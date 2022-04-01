@@ -1,4 +1,5 @@
-const { User, Role } = require('../models')
+const { User, Role } = require('../models');
+const { collection } = require('../models/category');
 
 const isValiteRole = (async(role = '') => {
     const roleExist = await Role.findOne({ role });
@@ -23,4 +24,11 @@ const idExists = async(id) => {
     }
 };
 
-module.exports = { isValiteRole, isValiteMail, idExists };
+const allowedCollections = (collection = '', collections = []) => {
+    const isInclude = collections.includes(collection);
+
+    if (!isInclude) { throw new Error(`This collection ${collection} is not allowed - ${collections}`) };
+    return true;
+}
+
+module.exports = { isValiteRole, isValiteMail, idExists, allowedCollections };
