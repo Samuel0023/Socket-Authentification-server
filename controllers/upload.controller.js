@@ -5,14 +5,6 @@ const { User, Product } = require("../models");
 
 const UploadController = {
     uploadDoc: async(req, res = response) => {
-
-        if (!req.files || Object.keys(req.files).length == 0 || !req.files.file) {
-            res.status(400).json({
-                msg: 'No files were uploaded.'
-            });
-            return;
-        }
-
         try {
             const name = await uploadDocument(req.files);
             console.log(name);
@@ -26,7 +18,7 @@ const UploadController = {
 
         const { id, collection } = req.params;
 
-        let modelo;
+        var modelo;
         switch (collection) {
             case 'users':
                 modelo = await User.findById(id);
@@ -48,9 +40,10 @@ const UploadController = {
                 return res.status(500).json({ msg: `forget to valid this` });
         }
 
-
-        res.json({ collection });
-
+        const name = await uploadDocument(req.files, undefined, collection);
+        modelo.img = await name;
+        await modelo.save();
+        res.json(modelo);
     }
 }
 
