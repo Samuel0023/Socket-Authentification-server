@@ -130,8 +130,9 @@ const UploadController = {
             // delete img on server
             const nameArr = modelo.img.split('/');
             const name = nameArr[nameArr.length - 1];
-            const [public_id] = name.split(',');
+            const [public_id] = name.split('.');
             cloudinary.uploader.destroy(public_id);
+            console.log(public_id);
 
         }
         const { tempFilePath } = req.files.file;
@@ -170,6 +171,12 @@ const UploadController = {
             return res.redirect(modelo.img)
 
         }
+        //return JSON.
+        // if ( modelo.img ) {
+        //     return res.json({
+        //         img: modelo.img
+        //     });
+        // }
         const pathPlaceHolder = path.join(__dirname, '../public/assets', 'no-image.jpg');
         res.sendFile(pathPlaceHolder);
     }
