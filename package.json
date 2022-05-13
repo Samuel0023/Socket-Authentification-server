@@ -1,5 +1,5 @@
 {
-    "name": "restserver",
+    "name": "16-sockets_con_autentificacion",
     "version": "1.0.0",
     "description": "RESTserver using Express and Nodejs",
     "main": "app.js",
