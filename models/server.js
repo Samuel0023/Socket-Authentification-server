@@ -2,12 +2,15 @@ const express = require('express');
 require('dotenv');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const { createServer } = require('http');
 const { dbConnection } = require('../database/config.db');
-
+const { socketController } = require('../sockets/controller');
 class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
+        this.server = createServer(this.app);
+        this.io = require('socket.io')(this.server);
 
         this.paths = {
             auth: '/api/auth',
@@ -25,6 +28,8 @@ class Server {
         this.app.use(express.json());
         //app routes
         this.routes();
+        //sockets
+        this.sockets();
     }
     async connectDB() {
         await dbConnection();
@@ -51,10 +56,11 @@ class Server {
         this.app.use(this.paths.uploads, require('../routes/uploads.routes'));
 
     }
-
+    sockets() {
+        this.io.on('connection', socketController);
+    }
     listen() {
-
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log('servidor corriendo en puerto ', this.port);
         });
     }
