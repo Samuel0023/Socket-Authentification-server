@@ -1,4 +1,5 @@
 const { googleVerify } = require("../helpers/google.verify");
+const { generateJWT } = require('../helpers/auth.token');
 const Login = require("../helpers/login");
 
 const { User } = require('../models');
@@ -63,4 +64,14 @@ const googleSignIn = async(req, res) => {
     }
 }
 
-module.exports = { login, googleSignIn };
+const renewToken = async(req, res) => {
+    const user = req.userAuth;
+
+    //generar JWT
+    const token = await generateJWT(user.id);
+    res.json({
+        user,
+        token
+    })
+}
+module.exports = { login, googleSignIn, renewToken };
