@@ -49,11 +49,11 @@ const googleSignIn = async(req, res) => {
         }
 
         if (!user.state) return res.status(401).json({ msg: 'talk with the admin, user blocked :( ' });
-
+        const token = id_token;
         res.json({
             msg: 'Everythings ok :) ',
             user,
-            id_token
+            token
 
         });
     } catch (error) {

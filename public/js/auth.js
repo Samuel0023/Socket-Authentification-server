@@ -23,8 +23,10 @@ function handleCredentialResponse(response) {
             })
         .then(resp => resp.json())
         .then(resp => {
-            console.log(resp);
+            // console.log(token);
+            console.log(resp.token);
             localStorage.setItem('mail', resp.user.mail);
+            localStorage.setItem('token', resp.token);
             //location.reload();
         })
         .catch(console.warn);
