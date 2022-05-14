@@ -1,3 +1,33 @@
+const myForm = document.querySelector('form');
+
+const url = (window.location.hostname.includes('localhost')) ?
+    'http://localhost:8080/api/auth/' :
+    'https://sams-proyect.herokuapp.com/api/auth/';
+
+
+myForm.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const formData = {};
+    for (let elem of myForm.elements) {
+        if (elem.name.length > 0) {
+            formData[elem.name] = elem.value;
+        }
+    }
+
+    fetch(url + 'login', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: { 'Content-type': 'application/json' }
+        })
+        .then(resp => resp.json())
+        .then(({ msg, token }) => {
+            msg ?
+                console.error(msg) : localStorage.setItem('token', token);
+        })
+        .catch(err => { console.log(err); });
+});
+
 function handleCredentialResponse(response) {
 
     // Google Token :  ID_TOKEN 
@@ -6,13 +36,7 @@ function handleCredentialResponse(response) {
         id_token: response.credential
     };
 
-    fetch(window.location.hostname.includes('localhost')
-
-            ?
-            'http://localhost:8080/api/auth/google'
-
-            :
-            'https://sams-proyect.herokuapp.com/api/auth/google',
+    fetch(url + 'google',
 
             {
                 method: 'POST',

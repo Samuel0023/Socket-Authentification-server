@@ -13,7 +13,6 @@ class Login {
     }
 
     async validateUser(res) {
-        //console.log({ "mail": `${this.mail}` });
         if (!this.user) {
             return res.status(400).json({
                 msg: 'user not found'
@@ -27,14 +26,12 @@ class Login {
         if (!this.validatePassword()) {
             return res.status(400).json({
                 msg: 'incorrect password'
-
             });
 
         }
         const token = await generateJWT(this.user.id);
         let user = this.user;
         return res.json({
-            msg: 'Login OK :)',
             user,
             token
         });

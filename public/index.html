@@ -15,17 +15,28 @@
             <h1>Google Sign-in</h1>
             <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-            <div id="g_id_onload" data-client_id="196777191341-1gate9po49u8uga88fnaighhkmu9sdgq.apps.googleusercontent.com" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false" data-callback="handleCredentialResponse"></div>
             <hr>
-            <br>
+            <div id="g_id_onload" data-client_id="196777191341-1gate9po49u8uga88fnaighhkmu9sdgq.apps.googleusercontent.com" data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false" data-callback="handleCredentialResponse"></div>
             <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
             </div>
             <br>
-            <button id="google_signout">
-                SignOut
-            </button>
+
+            <button class="btn btn-primary" id="google_signout">
+                    SignOut
+                </button>
+
         </div>
         <div class="col-sm-6">
+            <h1>Manual Login</h1>
+            <hr>
+            <form action="" class="d-grid">
+                <input type="email" name="mail" class="form-control mb-2" placeholder="email">
+                <input type="password" name="password" class="form-control mb-2" placeholder="password">
+                <button class="btn btn-primary">
+                    login
+                </button>
+            </form>
+
         </div>
     </div>
 
