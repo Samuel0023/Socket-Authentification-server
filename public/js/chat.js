@@ -6,11 +6,12 @@ let user = null;
 let socket = null;
 
 //validate localstorage token
-const validarJWT = async() => {
+const validateJWT = async() => {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || '';
 
-    if (token.length <= 11) {
+
+    if (token.length <= 10) {
 
         window.location = 'index.html';
         throw new Error('No found token in server');
@@ -23,17 +24,34 @@ const validarJWT = async() => {
         }
     });
 
-    //resp.json() => convierte el body de la resp en un formato json
-    const { user: userDB, token: tokenDB } = await resp.json();
-    console.log(userDB, tokenDB);
+    try {
+        //resp.json() => convierte el body de la resp en un formato json
+        const { user: userDB, token: tokenDB } = await resp.json();
+        console.log(userDB, token);
 
-    localStorage.setItem('token', tokenDB);
+        localStorage.setItem('token', tokenDB);
+        user = userDB;
+
+        document.title = user.name;
+
+        await connectSocket();
+    } catch (error) {
+        window.location = 'index.html';
+    }
+
+}
+
+const connectSocket = async() => {
+    const socket = io({
+        'extraHeaders': {
+            'x-token': localStorage.getItem('token'),
+        }
+    });
 }
 
 const main = async() => {
     //validate JWT token
-    await validarJWT();
+    await validateJWT();
 }
 
 main();
-//const socket = io();

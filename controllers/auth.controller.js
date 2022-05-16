@@ -50,7 +50,7 @@ const googleSignIn = async(req, res) => {
         }
 
         if (!user.state) return res.status(401).json({ msg: 'talk with the admin, user blocked :( ' });
-        const token = id_token;
+        const token = await generateJWT(user.id);
         res.json({
             msg: 'Everythings ok :) ',
             user,
