@@ -67,13 +67,30 @@ const connectSocket = async() => {
 
     });
     socket.on('active-users', (payload) => {
-        console.log(payload);
+
+        showActiveUsers(payload);
     });
     socket.on('serve-message-priv', () => {
 
     });
 }
 
+const showActiveUsers = (users = []) => {
+    let usersHtml = '';
+
+    users.forEach((user) => {
+        usersHtml += `
+            <li>
+                <p>
+                    <h5 class="text-success">${user.name}</h5>
+                    <span class="fs-6 text-muted">${user.uid}</span>
+                </p>
+            </li>
+        `
+    });
+
+    listUsers.innerHTML = usersHtml;
+}
 const main = async() => {
     //validate JWT token
     await validateJWT();
