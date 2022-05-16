@@ -5,6 +5,13 @@ const url = (window.location.hostname.includes('localhost')) ?
 let user = null;
 let socket = null;
 
+// html references : 
+const txtUid = document.getElementById('txtUid');
+const txtMessage = document.getElementById('txtMessage');
+const listUsers = document.getElementById('listUsers');
+const listMessages = document.getElementById('listMessages');
+const btnSalir = document.getElementById('btnSalir');
+
 //validate localstorage token
 const validateJWT = async() => {
 
@@ -27,7 +34,7 @@ const validateJWT = async() => {
     try {
         //resp.json() => convierte el body de la resp en un formato json
         const { user: userDB, token: tokenDB } = await resp.json();
-        console.log(userDB, token);
+        //console.log(userDB, token);
 
         localStorage.setItem('token', tokenDB);
         user = userDB;
@@ -46,6 +53,18 @@ const connectSocket = async() => {
         'extraHeaders': {
             'x-token': localStorage.getItem('token'),
         }
+    });
+
+    socket.on('connect', () => {
+        console.log('Sockets Online :D !!!');
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Sockets Offline :(');
+    });
+
+    socket.on('receive-sockets', () => {
+
     });
 }
 
