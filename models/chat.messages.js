@@ -29,10 +29,10 @@ class ChatMessages {
     }
 
     connectUser(user) {
-        this.users[user.uid] = user;
+        this.users[user.id] = user;
     }
 
-    desconecUser(id) {
+    disconnectUser(id) {
         delete this.users[id];
     }
 }

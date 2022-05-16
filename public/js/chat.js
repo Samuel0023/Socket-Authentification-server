@@ -66,8 +66,8 @@ const connectSocket = async() => {
     socket.on('receive-sockets', () => {
 
     });
-    socket.on('active-users', () => {
-
+    socket.on('active-users', (payload) => {
+        console.log(payload);
     });
     socket.on('serve-message-priv', () => {
 
