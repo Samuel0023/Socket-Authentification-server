@@ -1,6 +1,6 @@
 const url = (window.location.hostname.includes('localhost')) ?
     'http://localhost:8080/api/auth/' :
-    'https://sams-proyect.herokuapp.com/api/auth/';
+    'https://chat-with-sockets-samuel.herokuapp.com/api/auth/';
 
 let user = null;
 let socket = null;
