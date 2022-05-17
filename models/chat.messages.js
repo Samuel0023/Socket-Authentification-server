@@ -23,7 +23,7 @@ class ChatMessages {
     }
 
     sendMessage(uid, name, msg) {
-        this.mensajes.unshift(
+        this.messages.unshift(
             new Message(uid, name, msg)
         );
     }
